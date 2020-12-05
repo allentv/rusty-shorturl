@@ -1,12 +1,14 @@
 #![feature(proc_macro_hygiene, decl_macro)]
+#[macro_use]
+extern crate rocket;
 
-use rocket::*;
-
-#[get("/<code>")]
-fn code(code: String) -> String {
-    return format!("Received code: {}", code);
-}
+mod handlers;
 
 fn main() {
-    rocket::ignite().mount("/", routes![code]).launch();
+    rocket::ignite()
+        .mount(
+            "/",
+            routes![handlers::code, handlers::static_files, handlers::ping,],
+        )
+        .launch();
 }
