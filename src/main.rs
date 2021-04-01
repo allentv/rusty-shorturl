@@ -5,10 +5,14 @@ extern crate rocket;
 mod handlers;
 
 fn main() {
-    rocket::ignite()
-        .mount(
-            "/",
-            routes![handlers::code, handlers::static_files, handlers::ping,],
-        )
-        .launch();
+    let mut mnt = rocket::ignite();
+
+    // Add root routes
+    mnt = mnt.mount(
+        "/",
+        routes![handlers::code, handlers::static_files, handlers::ping,],
+    );
+
+    // Start the web server
+    mnt.launch();
 }

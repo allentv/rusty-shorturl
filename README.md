@@ -1,6 +1,18 @@
 # rusty-shorturl
 
-Short URL service in Rust written in [Rocket](https://rocket.rs)
+This is a learning project as part of my exploration in Rust
+
+## Background
+
+This is a web application developed using the [Rocket framework](rocket.rs), that supports lookup of a short URL and implement the redirect if already available. Else will redirect to a custom error page with an option to add a new short URL.
+
+## Implementation
+
+The implemenation consists of running a web application developed with rocket framework using Rust nightly build with Postgres database as the backend.
+
+## Running the Application
+
+
 
 ## Containerization
 
