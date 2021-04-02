@@ -3,13 +3,25 @@
 extern crate rocket;
 #[macro_use]
 extern crate rocket_contrib;
-use rocket_contrib::databases::diesel;
+#[macro_use]
+extern crate diesel;
 
 #[database("shorty_db")]
 pub struct ShortyDBConn(diesel::SqliteConnection);
 
+use self::schema::shorty;
 use rocket::response::NamedFile;
+use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
+
+#[derive(Queryable, AsChangeset, Serialize, Deserialize)]
+#[table_name = "shorty"]
+pub struct ShortURL {
+    pub id: i32,
+    pub handle: String,
+    pub full_url: String,
+    pub created: String,
+}
 
 #[get("/<code>")]
 fn code(_conn: ShortyDBConn, code: String) -> String {
